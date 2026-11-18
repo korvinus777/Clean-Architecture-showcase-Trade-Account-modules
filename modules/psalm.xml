@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<psalm
+    errorLevel="1"
+    resolveFromConfigFile="true"
+    ignoreInternalFunctionFalseReturn="true"
+    ignoreInternalFunctionNullReturn="true"
+    findUnusedVariablesAndParams="true"
+    findUnusedCode="true"
+    findUnusedPsalmSuppress="true"
+    ensureArrayStringOffsetsExist="false"
+    ensureArrayIntOffsetsExist="false"
+    reportInfo="true"
+    allowNamedArgumentCalls="true"
+    autoloader="./vendor/autoload.php"
+    cacheDirectory="./docker/psalm"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://getpsalm.org/schema/config"
+    xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+>
+    <projectFiles>
+        <directory name="src"/>
+        <ignoreFiles>
+            <directory name="vendor" />
+            <!-- contains too many unfixable errors -->
+            <file name="src/Modules/Metatrader/App/Services/RawApi/Connection/Crypt/Aes256.php"/>
+            <file name="src/Package/Components/Log/Handlers/ElasticsearchHandler.php"/>
+            <!-- tmp files -->
+            <directory name="src/Package/Migrations" />
+        </ignoreFiles>
+    </projectFiles>
+
+    <stubs>
+        <file name="vendor/swoole/ide-helper/src/swoole/Swoole/Table.php"/>
+        <file name="vendor/swoole/ide-helper/src/swoole/Swoole/Event.php"/>
+        <file name="vendor/swoole/ide-helper/src/swoole/Swoole/Timer.php"/>
+        <file name="vendor/swoole/ide-helper/src/swoole_library/src/alias_ns.php"/>
+        <file name="vendor/swoole/ide-helper/src/swoole_library/src/core/ConnectionPool.php"/>
+        <file name="vendor/swoole/ide-helper/src/swoole_library/src/core/Process/Manager.php"/>
+        <file name="vendor/swoole/ide-helper/src/swoole_library/src/core/Database/PDOPool.php"/>
+        <file name="vendor/swoole/ide-helper/src/swoole_library/src/core/Database/PDOConfig.php"/>
+        <file name="vendor/swoole/ide-helper/src/swoole_library/src/core/Coroutine/WaitGroup.php"/>
+    </stubs>
+
+    <issueHandlers>
+        <PropertyNotSetInConstructor errorLevel="suppress"/>
+        <PossiblyInvalidArrayOffset errorLevel="suppress"/>
+        <RedundantPropertyInitializationCheck errorLevel="suppress"/>
+        <MixedReturnTypeCoercion errorLevel="suppress"/>
+        <UnnecessaryVarAnnotation errorLevel="suppress"/>
+        <MixedInferredReturnType errorLevel="suppress"/>
+        <MixedReturnStatement errorLevel="suppress"/>
+        <UnusedClass errorLevel="suppress"/>
+        <PossiblyUnusedMethod errorLevel="suppress"/>
+
+        <UnusedFunctionCall>
+            <errorLevel type="suppress">
+                <referencedFunction name="swoole\coroutine\go"/>
+                <referencedFunction name="swoole\coroutine\run"/>
+            </errorLevel>
+        </UnusedFunctionCall>
+
+        <PossiblyUnusedParam>
+            <errorLevel type="suppress">
+                <file name="src/Package/Providers/ModuleServiceProvider.php"/>
+            </errorLevel>
+        </PossiblyUnusedParam>
+
+        <PossiblyUnusedProperty>
+            <errorLevel type="suppress">
+                <!-- Свойства могут использовать в будущем -->
+                <file name="src/Modules/*/App/Services/*/*Result.php"/>
+                <file name="src/Modules/*/Domain/Services/*/*Result.php"/>
+                <directory name="src/Modules/*/Domain/Entities"/>
+                <directory name="src/Modules/*/Domain/ValueObjects"/>
+                <directory name="src/Modules/*/Domain/Dto"/>
+                <directory name="src/Modules/*/Api/Dto"/>
+                <directory name="src/Modules/*/App/Dto"/>
+                <directory name="src/Modules/*/Infrastructure/Jobs"/>
+            </errorLevel>
+        </PossiblyUnusedProperty>
+
+        <PossiblyInvalidMethodCall>
+            <errorLevel type="suppress">
+                <directory name="src/Modules/*/Infrastructure/Repositories"/>
+            </errorLevel>
+        </PossiblyInvalidMethodCall>
+
+        <MixedMethodCall>
+            <errorLevel type="suppress">
+                <directory name="src/Modules/*/Infrastructure/Repositories"/>
+            </errorLevel>
+        </MixedMethodCall>
+
+        <MissingPropertyType>
+            <errorLevel type="suppress">
+                <directory name="src/Modules/*/Infrastructure/Models/Factories"/>
+            </errorLevel>
+        </MissingPropertyType>
+
+        <ArgumentTypeCoercion>
+            <errorLevel type="suppress">
+                <directory name="src/Modules/*/Infrastructure/Models/Factories"/>
+            </errorLevel>
+        </ArgumentTypeCoercion>
+    </issueHandlers>
+</psalm>

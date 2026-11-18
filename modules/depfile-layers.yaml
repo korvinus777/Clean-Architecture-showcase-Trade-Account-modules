@@ -1,0 +1,61 @@
+deptrac:
+  paths:
+    - ./src/Modules
+  exclude_files: ~
+  layers:
+    - name: Domain
+      collectors:
+        - type: className
+          regex: Platform\\\w+\\Domain\\.*
+    - name: Application
+      collectors:
+        - type: className
+          regex: Platform\\\w+\\App\\.*
+    - name: Api
+      collectors:
+        - type: className
+          regex: Platform\\\w+\\Api\\.*
+    - name: Infrastructure
+      collectors:
+        - type: className
+          regex: Platform\\\w+\\Infrastructure\\.*
+    - name: Components
+      collectors:
+        - type: className
+          regex: ^Platform\\Package\\.*
+        - type: className
+          regex: ^OpenApi\\.*
+
+    # defines vendor classes as layer
+    - name: Vendor
+      collectors:
+        - type: className
+          regex: Illuminate\\.*
+        - type: className
+          regex: Laravel\\.*
+        - type: className
+          regex: Kalnoy\\Nestedset\\.*
+        - type: className
+          regex: ^Swoole\\.*
+        - type: className
+          regex: ^GuzzleHttp\\.*
+        - type: className
+          regex: ^Psr\\.*
+  ruleset:
+    Components:
+      - Vendor
+    Infrastructure:
+      - Application
+      - Api
+      - Domain
+      - Vendor
+      - Components
+    Api:
+      - Application
+      - Domain
+      - Components
+    Application:
+      - Domain
+      - Components
+    Domain:
+      - Components

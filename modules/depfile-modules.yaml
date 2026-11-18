@@ -1,0 +1,47 @@
+deptrac:
+  paths:
+    - ./src/Modules
+  exclude_files:
+    - '#./\w+/Infrastructure/Adapters/.*#'
+  layers:
+    - name: Account
+      collectors:
+        - type: className
+          regex: Platform\\Account\\.*
+    - name: Brand
+      collectors:
+        - type: className
+          regex: Platform\\Brand\\.*
+    - name: Chart
+      collectors:
+        - type: className
+          regex: Platform\\Chart\\.*
+    - name: Crm
+      collectors:
+        - type: className
+          regex: Platform\\Crm\\.*
+    - name: Currency
+      collectors:
+        - type: className
+          regex: Platform\\Currency\\.*
+    - name: Lead
+      collectors:
+        - type: className
+          regex: Platform\\Lead\\.*
+    - name: Metatrader
+      collectors:
+        - type: className
+          regex: Platform\\Metatrader\\.*
+    - name: Symbol
+      collectors:
+        - type: className
+          regex: Platform\\Symbol\\.*
+    - name: Trade
+      collectors:
+        - type: className
+          regex: Platform\\Trade\\.*
+    - name: Transaction
+      collectors:
+        - type: className
+          regex: Platform\\Transaction\\.*
+  ruleset: ~
